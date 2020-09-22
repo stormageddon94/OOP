@@ -76,6 +76,7 @@ namespace Chainblock.Tests
         {
             //Arrange
             TransactionStatus tr = TransactionStatus.Successfull;
+
             //Act//Assert
             Assert.That(() => new Transaction(10, tr, "TestSender", null, 10), Throws.ArgumentException.With.Message.EqualTo("Receiver cannot be null or empty."));
         }
