@@ -17,6 +17,7 @@ namespace Chainblock
             this.Id = id;
             this.Status = transactionStatus;
             this.From = from;
+
             this.To = to;
             this.Amount = amount;
         }
