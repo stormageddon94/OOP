@@ -15,6 +15,7 @@ namespace Chainblock
         public Transaction(int id, TransactionStatus transactionStatus, string from, string to, double amount)
         {
             this.Id = id;
+
             this.Status = transactionStatus;
             this.From = from;
 
