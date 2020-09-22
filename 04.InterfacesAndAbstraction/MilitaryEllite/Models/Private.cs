@@ -7,9 +7,6 @@ namespace MilitaryEllite.Models
 {
     public class Private : SoldierBase, IPrivate
     {
-        private int id;
-        private string firstName;
-        private string lastName;
 
         public Private(int id, string firstName, string lastName) :base(id, firstName, lastName)
         {

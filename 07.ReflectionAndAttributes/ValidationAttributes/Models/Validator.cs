@@ -5,14 +5,12 @@ using ValidationAttributes.Attributes;
 
 namespace ValidationAttributes.Models
 {
-    public static class Validator: IVallidator
-    { 
+    public class Validator : IVallidator
+    {
         public bool IsValid(object obj)
         {
             var type = obj.GetType();
-            var properties = type.GetProperties();
-
-
+            return true;
         }
     }
 }

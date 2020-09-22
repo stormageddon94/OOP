@@ -19,4 +19,5 @@ namespace Logger.Models.Errors
         public string Message { get; private set; }
 
         public Level Level { get; private set; }
+    }
 }

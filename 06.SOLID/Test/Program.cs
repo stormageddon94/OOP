@@ -8,11 +8,11 @@ namespace Test
         {
             var cat = new Cat();
 
-            var type = cat.GetType().;
-            var type1 = typeof(Cat).;
+            var type = cat.GetType();
+            var type1 = typeof(Cat);
 
             Console.WriteLine(type.Name);
-            Console.WriteLine(type1.);
+            Console.WriteLine(type1);
         }
     }
 }
