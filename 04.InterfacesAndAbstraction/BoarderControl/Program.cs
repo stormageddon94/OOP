@@ -9,7 +9,7 @@ namespace BoarderControl
     {
         static void Main(string[] args)
         {
-            List<IBirthdate> birthdatesCollected = new List<IBirthdate>();
+            List<IId> idsChecked = new List<IId>();
 
             while (true)
             {
@@ -18,31 +18,31 @@ namespace BoarderControl
                 {
                     break;
                 }
-                else if (input[0] == "Citizen")
+
+                if (input.Length == 3)
                 {
-                    var name = input[1];
-                    var age = int.Parse(input[2]);
-                    var idNumber = input[3];
-                    var birthdate = input[4];
-                    var person = new Person(name, age, idNumber, birthdate);
-                    birthdatesCollected.Add(person);
+                    var name = input[0];
+                    var age = int.Parse(input[1]);
+                    var idNumber = input[2];
+                    var person = new Person(name, age, idNumber);
+                    idsChecked.Add(person);
                 }
-                else if (input[0] == "Pet")
+                else if (input.Length == 2)
                 {
-                    var name = input[1];
-                    var birthdate = input[2];
-                    var pet = new Pet(name, birthdate);
-                    birthdatesCollected.Add(pet);
+                    var model = input[0];
+                    var idNumber = input[1];
+                    var robot = new Robot(idNumber, model);
+                    idsChecked.Add(robot);
                 }
             }
 
-            var year = Console.ReadLine();
+            var endDigits = Console.ReadLine();
 
-            foreach (var birthday in birthdatesCollected)
+            foreach (var id in idsChecked)
             {
-                if (birthday.Birthdate.EndsWith(year))
+                if (id.IdNumber.EndsWith(endDigits))
                 {
-                    Console.WriteLine(birthday.Birthdate);
+                    Console.WriteLine(id.IdNumber);
                 }
             }
         }

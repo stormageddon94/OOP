@@ -1,19 +1,30 @@
-﻿using MilitaryEllite.Enums;
-using MilitaryEllite.Interfaces;
+﻿using MilitaryElite.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Models
+namespace MilitaryElite.Models
 {
     public class Mission : IMission
     {
-        public Mission(string codeName, MissionStateType state)
+        public Mission(string codeName, string state)
         {
             this.CodeName = codeName;
             this.State = state;
         }
-        public string CodeName { get; set; }
-        public MissionStateType State { get; set; }
+
+        public string CodeName { get; }
+
+        public string State { get; private set; }
+
+        public void CompleteMission()
+        {
+            this.State = "Finished";
+        }
+
+        public override string ToString()
+        {
+            return $"Code Name: {this.CodeName} State: {this.State}";
+        }
     }
 }

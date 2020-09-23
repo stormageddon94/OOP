@@ -1,23 +1,23 @@
-﻿using MilitaryEllite.Interfaces;
+﻿using MilitaryElite.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Models
+namespace MilitaryElite.Models
 {
-    public class Private : SoldierBase, IPrivate
+    public class Private : Soldier, IPrivate
     {
-
-        public Private(int id, string firstName, string lastName) :base(id, firstName, lastName)
-        {
-        }
-
         public Private(int id, string firstName, string lastName, double salary)
-            : base(id, firstName, lastName)
+        : base(id, firstName, lastName)
         {
             this.Salary = salary;
         }
 
-        public double Salary { get; private set; }
+        public double Salary { get; }
+
+        public override string ToString()
+        {
+            return base.ToString() + $" Salary: {this.Salary:F2}";
+        }
     }
 }

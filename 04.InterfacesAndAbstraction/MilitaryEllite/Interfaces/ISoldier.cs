@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Interfaces
+namespace MilitaryElite.Interfaces
 {
     public interface ISoldier
     {
@@ -10,7 +10,6 @@ namespace MilitaryEllite.Interfaces
 
         string FirstName { get; }
 
-        public string LastName { get; }
-
+        string LastName { get; }
     }
 }

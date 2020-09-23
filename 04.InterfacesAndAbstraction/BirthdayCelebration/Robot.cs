@@ -14,14 +14,14 @@ namespace BoarderControl
         public string IdNumber { get; set; }
         public string Model { get; set; }
 
-        public bool IsIdFake(string endNumbers)
-        {
-            if (this.IdNumber.EndsWith(endNumbers))
-            {
-                return true;
-            }
+        //public bool IsIdFake(string endNumbers)
+        //{
+        //    if (this.IdNumber.EndsWith(endNumbers))
+        //    {
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
     }
 }

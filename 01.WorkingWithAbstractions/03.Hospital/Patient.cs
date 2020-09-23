@@ -1,4 +1,4 @@
-﻿namespace _03.Hospital
+﻿namespace P04_Hospital
 {
     public class Patient
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MilitaryEllite.Interfaces
+﻿namespace MilitaryElite.Interfaces
 {
-    public interface IPrivate
+    public interface IPrivate : ISoldier
     {
         double Salary { get; }
     }

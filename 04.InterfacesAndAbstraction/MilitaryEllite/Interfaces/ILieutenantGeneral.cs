@@ -1,12 +1,12 @@
-﻿using MilitaryEllite.Models;
+﻿using MilitaryElite.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Interfaces
+namespace MilitaryElite.Interfaces
 {
-    public interface ILieutenantGeneral 
+    public interface ILieutenantGeneral : IPrivate
     {
-        ICollection<IPrivate> Privates { get; }
+        List<ISoldier> Privates { get; }
     }
 }

@@ -1,17 +1,42 @@
-﻿using MilitaryEllite.Interfaces;
+﻿using MilitaryElite.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Models
+namespace MilitaryElite.Models
 {
     public class SpecialisedSoldier : Private, ISpecialisedSoldier
     {
-        public SpecialisedSoldier(int id, string firstName, string lastName, double salary) : base(id, firstName, lastName, salary)
+        private string corp;
+        public SpecialisedSoldier(int id, string firstName, string lastName, double salary, string corp)
+        : base(id, firstName, lastName, salary)
         {
-            this.SpecialisedCorps = new List<ISpecialisedSoldierCorp>();
+            this.Corp = corp;
         }
 
-        public List<ISpecialisedSoldierCorp> SpecialisedCorps { get; set; }
+        public string Corp
+        {
+            get
+            {
+                return this.corp;
+            }
+            private set
+            {
+                if (value != "Marines" && value != "Airforces")
+                {
+                    throw new ArgumentException("Invalid corp.");
+                }
+
+                this.corp = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(base.ToString())
+                .Append($"Corps: {this.Corp}");
+            return sb.ToString();
+        }
     }
 }

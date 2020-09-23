@@ -1,14 +1,15 @@
-﻿using MilitaryEllite.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Interfaces
+namespace MilitaryElite.Interfaces
 {
     public interface IMission
     {
-        string CodeName { get; set; }
+        string CodeName { get; }
 
-        MissionStateType State { get; set; }
+        string State { get; }
+
+        void CompleteMission();
     }
 }

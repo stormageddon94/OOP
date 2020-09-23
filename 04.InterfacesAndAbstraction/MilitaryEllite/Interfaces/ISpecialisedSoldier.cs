@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Interfaces
+namespace MilitaryElite.Interfaces
 {
-    public interface ISpecialisedSoldier
+     public interface ISpecialisedSoldier : IPrivate
     {
-        List<ISpecialisedSoldierCorp> SpecialisedCorps { get; set; }
+        string Corp { get; }
     }
 }

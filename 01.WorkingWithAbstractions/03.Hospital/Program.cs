@@ -1,124 +1,124 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using System.Runtime.InteropServices;
 
-namespace _03.Hospital
+namespace P04_Hospital
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            var doctors = new List<Doctor>();
-            var departments = new List<Department>();
+            List<Doctor> doctors = new List<Doctor>();
+            List<Department> departments = new List<Department>();
 
-            var roomNumber = 1;
+            //var roomNumber = 1;
 
-            while (true)
+            string command = Console.ReadLine();
+            while (command != "Output")
             {
-                var input = Console.ReadLine();
-                if (input == "Output")
-                {
-                    break;
-                }
+                string[] commandData = command.Split();
 
-                var departmentData = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                var departmentName = departmentData[0];
-                var doctorFirstName = departmentData[1];
-                var doctorLastName = departmentData[2];
-                var patientName = departmentData[3];
+                var departmentName = commandData[0];
+                var name = commandData[1];
+                var familyName = commandData[2];
+                var doctor = new Doctor(name, familyName);
 
-                var department = new Department(departmentName);
-                var patient = new Patient(patientName);
-                var doctor = new Doctor(doctorFirstName, doctorLastName);
+                var patient = new Patient(commandData[3]);
 
-                var currentRoom = new Room(roomNumber);
-
-                if (!doctors.Contains(doctor))
+                var indexOfDoctor = doctors.FindIndex(x => x.Name == name && x.FamilyName == familyName);
+                if (indexOfDoctor == -1)
                 {
                     doctor.Patients.Add(patient);
                     doctors.Add(doctor);
                 }
                 else
                 {
-                    var indexOfDoctor = doctors.IndexOf(doctor);
                     doctors[indexOfDoctor].Patients.Add(patient);
                 }
 
-                if (!departments.Contains(department))
+                var indexOfDepartment = departments.FindIndex(x => x.Name == departmentName);
+                if (indexOfDepartment == -1)
                 {
-                    currentRoom.PatientsInRoom.Add(patient);
-                    department.Rooms.Add(currentRoom);
-                    departments.Add(department);
+                    var currentRoom = new Room()
+                    {
+                        Name = 1
+                    };
+                    currentRoom.Patients.Add(patient);
+
+                    var departament = new Department(departmentName);
+                    departament.Rooms.Add(currentRoom);
+                    departments.Add(departament);
                 }
                 else
                 {
-                    var indexOfDepartment = departments.IndexOf(department);
                     var currentDepartment = departments[indexOfDepartment];
-                    if (currentDepartment.Rooms.Count <= 20)
+                    var currentRoomCount = currentDepartment.Rooms.Count();
+
+                    if (currentDepartment.Rooms[currentRoomCount - 1].Patients.Count() < 3)
                     {
-                        var roomIndex = currentDepartment.Rooms.IndexOf(currentRoom);
-                        if (currentDepartment.Rooms[roomIndex].PatientsInRoom.Count >= 3)
+                        currentDepartment.Rooms[currentRoomCount - 1].Patients.Add(patient);
+                    }
+                    else
+                    {
+                        if (currentRoomCount < 20)
                         {
-                            roomNumber++;
-                            var newRoom = new Room(roomNumber);
-                            newRoom.PatientsInRoom.Add(patient);
+                            var newRoom = new Room()
+                            {
+                                Name = currentRoomCount + 1,
+                                Patients = new List<Patient> { patient },
+                            };
+
                             currentDepartment.Rooms.Add(newRoom);
                         }
-                        else
-                        {
-                            currentDepartment.Rooms[roomIndex].PatientsInRoom.Add(patient);
-                        }
+
                     }
+
                 }
+
+
+                command = Console.ReadLine();
             }
 
-            var command = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-            while (true)
+            command = Console.ReadLine();
+            while (command != "End")
             {
-                if (command[0] == "End")
-                {
-                    break;
-                }
+                string[] commandData = command.Split();
 
-                if (command.Length == 1) //Department
+                if (commandData.Length == 1)
                 {
-                    var departmentToFind = new Department(command[0]);
-                    var departmentIndex = departments.IndexOf(departmentToFind);
-                    var currentDepartment = departments[departmentIndex];
-                    foreach (var room in currentDepartment.Rooms)
-                    {
-                        foreach (var patient in room.PatientsInRoom)
-                        {
-                            Console.WriteLine(patient.Name);
-                        }
-                    }
-                }
-                else if (command.Length == 2 && int.TryParse(command[1], out int number)) // Department and Room
-                {
-                    var departmentToFind = new Department(command[0]);
-                    var deppartmentIndex = departments.IndexOf(departmentToFind);
-                    var rooms = departments[deppartmentIndex].Rooms;
-                    var roomToFind = new Room(number);
-                    var indexOfRoom = rooms.IndexOf(roomToFind);
-                    var patientsInRoom = rooms[indexOfRoom].PatientsInRoom;
-                    foreach (var patient in patientsInRoom)
+                    var department = departments.Where(x => x.Name == commandData[0]).FirstOrDefault();
+                    var allDeaprtmentPatients = department.Rooms.SelectMany(x => x.Patients);
+
+                    foreach (var patient in allDeaprtmentPatients)
                     {
                         Console.WriteLine(patient.Name);
                     }
                 }
-                else // Doctor
+                else if (commandData.Length == 2 && int.TryParse(commandData[1], out int roomName))
                 {
-                    var doctorToFind = new Doctor(command[0], command[1]);
-                    var indexOfDoctor = doctors.IndexOf(doctorToFind);
-                    var patients = doctors[indexOfDoctor].Patients;
+                    var department = departments.Where(x => x.Name == commandData[0]).FirstOrDefault();
+                    var roomPatients = department.Rooms.Where(x => x.Name == roomName).FirstOrDefault().Patients;
+                    var orderedPatients = roomPatients.OrderBy(x => x.Name);
 
-                    foreach (var patient in patients)
+                    foreach (var patient in orderedPatients)
                     {
                         Console.WriteLine(patient.Name);
                     }
                 }
+                else
+                {
+                    var doctor = doctors.Where(x => x.Name == commandData[0] && x.FamilyName == commandData[1]).FirstOrDefault();
+                    var orderedPatients = doctor.Patients.OrderBy(x => x.Name);
+                    foreach (var patient in orderedPatients)
+                    {
+                        Console.WriteLine(patient.Name);
+                    }
+                }
+                command = Console.ReadLine();
             }
-            
         }
     }
 }
+
+

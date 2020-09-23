@@ -8,7 +8,5 @@ namespace BoarderControl
     {
         string IdNumber { get; set; }
 
-        bool IsIdFake(string idNumber);
-
     }
 }

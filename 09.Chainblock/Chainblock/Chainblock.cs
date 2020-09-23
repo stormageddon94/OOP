@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Chainblock
@@ -101,7 +102,8 @@ namespace Chainblock
 
         public IEnumerable<ITransaction> GetAllOrderedByAmountDescendingThenById()
         {
-            throw new NotImplementedException();
+            var result = this.transactions.OrderByDescending(x => x.Amount).ThenBy(x => x.Id);
+            return result;
         }
 
         public IEnumerable<string> GetAllReceiversWithTransactionStatus(TransactionStatus status)
@@ -151,34 +153,72 @@ namespace Chainblock
 
         public IEnumerable<ITransaction> GetByReceiverOrderedByAmountThenById(string receiver)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(receiver))
+            {
+                throw new InvalidOperationException("Receiver cannot be null or empty.");
+            }
+            var transactionByReceiver = this.transactions.Where(x => x.To == receiver);
+            if (!transactionByReceiver.Any())
+            {
+                throw new InvalidOperationException("Receiver not found.");
+            }
+            var result = transactionByReceiver.OrderByDescending(x => x.Amount).ThenBy(y => y.Id).ToList();
+            return result;
         }
 
         public IEnumerable<ITransaction> GetBySenderAndMinimumAmountDescending(string sender, double amount)
         {
-            throw new NotImplementedException();
+            var transactionBySender = this.transactions.Where(x => x.From == sender).OrderByDescending(y => y.Amount).ToList();
+            var result = transactionBySender.Where(x => x.Amount >= amount);
+            if (!result.Any())
+            {
+                throw new InvalidOperationException("No transactions are found.");
+            }
+            return result;
         }
 
         public IEnumerable<ITransaction> GetBySenderOrderedByAmountDescending(string sender)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(sender))
+            {
+                throw new InvalidOperationException("Sender cannot be null or empty.");
+            }
+            var result = this.transactions.Where(x => x.From == sender).OrderByDescending(y => y.Amount).ToList();
+            if (!result.Any())
+            {
+                throw new InvalidOperationException("Sender not found.");
+            }
+
+            return result;
         }
 
         public IEnumerable<ITransaction> GetByTransactionStatus(TransactionStatus status)
         {
-            throw new NotImplementedException();
+            var result = this.transactions.Where(x => x.Status == status).ToList();
+            if (!result.Any())
+            {
+                throw new InvalidOperationException("No transaction with this status are found.");
+            }
+            return result;
         }
 
         public IEnumerable<ITransaction> GetByTransactionStatusAndMaximumAmount(TransactionStatus status, double amount)
         {
-            throw new NotImplementedException();
+            var result = this.transactions.Where(ts => ts.Status == status && ts.Amount <= amount).OrderByDescending(x => x.Amount).ToList();
+            return result;
         }
 
         public IEnumerator<ITransaction> GetEnumerator() => this.transactions.GetEnumerator();
 
         public void RemoveTransactionById(int id)
         {
-            throw new NotImplementedException();
+            if (!this.ids.Contains(id))
+            {
+                throw new InvalidOperationException("ID doesn't exist.");
+            }
+
+            var transaction = this.transactions.Where(x => x.Id == id).ToList();
+            this.transactions.Remove(transaction[0]);
         }
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();

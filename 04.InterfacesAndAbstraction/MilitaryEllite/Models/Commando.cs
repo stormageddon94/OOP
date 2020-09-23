@@ -5,24 +5,24 @@ using System.Text;
 
 namespace MilitaryElite.Models
 {
-    public class Engineer : SpecialisedSoldier, IEngineer
+    public class Commando : SpecialisedSoldier, ICommando
     {
-        public Engineer(int id, string firstName, string lastName, double salary, string corp, List<IRepair> repairs)
+        public Commando(int id, string firstName, string lastName, double salary, string corp, List<IMission> missions)
         : base(id, firstName, lastName, salary, corp)
         {
-            this.Repairs = repairs;
+            this.Missions = missions;
         }
 
-        public List<IRepair> Repairs { get; }
+        public List<IMission> Missions { get; }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(base.ToString())
-                .AppendLine("Repairs:");
-            foreach (IRepair repair in this.Repairs)
+                .AppendLine("Missions:");
+            foreach (IMission mission in Missions)
             {
-                sb.AppendLine($"  {repair}");
+                sb.AppendLine($"  {mission}");
             }
             return sb.ToString().Trim();
         }

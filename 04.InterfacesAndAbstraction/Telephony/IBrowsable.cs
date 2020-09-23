@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Telephony
 {
-    public interface IStationeryPhone
+    public interface IBrowsable
     {
-        string Dial(string number);
+        string Browse(string website);
     }
 }

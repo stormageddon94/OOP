@@ -1,9 +1,9 @@
-﻿using MilitaryEllite.Interfaces;
+﻿using MilitaryElite.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Models
+namespace MilitaryElite.Models
 {
     public class Repair : IRepair
     {
@@ -13,8 +13,14 @@ namespace MilitaryEllite.Models
             this.HoursWorked = hoursWorked;
         }
 
-        public string PartName { get; set; }
+        public string PartName { get; }
 
-        public int HoursWorked { get; set; }
+        public int HoursWorked { get; }
+
+        public override string ToString()
+        {
+            return $"Part Name: {this.PartName} Hours Worked: {this.HoursWorked}";
+        }
+
     }
 }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Interfaces
+namespace MilitaryElite.Interfaces
 {
     public interface IRepair
     {
-        string PartName { get; set; }
+        string PartName { get; }
 
-        int HoursWorked { get; set; }
+        int HoursWorked { get; }
     }
 }

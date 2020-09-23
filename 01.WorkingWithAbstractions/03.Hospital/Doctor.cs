@@ -1,18 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace _03.Hospital
+namespace P04_Hospital
 {
-     public class Doctor
+    public class Doctor
     {
-        public Doctor(string firstName, string lastName)
+        public Doctor(string name, string familyName)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            this.Name = name;
+            this.FamilyName = familyName;
         }
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
-        public string LastName { get; set; }
+        public string FamilyName { get; set; }
 
         public List<Patient> Patients { get; set; } = new List<Patient>();
     }

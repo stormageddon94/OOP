@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Telephony
 {
@@ -15,13 +16,13 @@ namespace Telephony
                 {
                     if (number.Length == 10)
                     {
-                        ISmartPhone smartPhone = new SmartPhone();
+                        ICallable smartPhone = new SmartPhone();
                         Console.WriteLine(smartPhone.Call(number));
                     }
-                    else if (number.Length == 7)
+                    else
                     {
-                        IStationeryPhone stationeryPhone = new StationeryPhone();
-                        Console.WriteLine(stationeryPhone.Dial(number));
+                        ICallable stationeryPhone = new StationeryPhone();
+                        Console.WriteLine(stationeryPhone.Call(number));
                     }
                 }
                 catch (Exception ex)
@@ -34,7 +35,7 @@ namespace Telephony
             {
                 try
                 {
-                    ISmartPhone smartPhone = new SmartPhone();
+                    IBrowsable smartPhone = new SmartPhone();
                     Console.WriteLine(smartPhone.Browse(website));
                 }
                 catch (Exception ex)

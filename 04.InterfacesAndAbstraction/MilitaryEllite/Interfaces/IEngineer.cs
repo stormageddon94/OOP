@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryEllite.Interfaces
+namespace MilitaryElite.Interfaces
 {
-    public interface IEngineer
+    public interface IEngineer : ISpecialisedSoldier
     {
-        ICollection<IRepair> Repairs { get; set; }
+        List<IRepair> Repairs { get; }
     }
 }

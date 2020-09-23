@@ -188,7 +188,7 @@ namespace Chainblock.Tests
             //Act
             var transactions = this.chainblock.GetByTransactionStatus(TransactionStatus.Successfull).ToList();
             //Assert
-            Assert.That(transactions.Count, Is.EqualTo(2));
+            Assert.That(transactions.Count, Is.EqualTo(5));
             Assert.That(transactions[0].Id, Is.EqualTo(10));
         }
 
@@ -261,11 +261,11 @@ namespace Chainblock.Tests
             var orderedTransactions = this.chainblock.GetAllOrderedByAmountDescendingThenById().ToList();
             //Assert
             Assert.That(orderedTransactions[0].Amount, Is.EqualTo(100));
-            Assert.That(orderedTransactions[1].Amount, Is.EqualTo(12));
-            Assert.That(orderedTransactions[2].Amount, Is.EqualTo(10));
-            Assert.That(orderedTransactions[2].Id, Is.EqualTo(10));
-            Assert.That(orderedTransactions[3].Amount, Is.EqualTo(10));
-            Assert.That(orderedTransactions[3].Id, Is.EqualTo(11));
+            Assert.That(orderedTransactions[1].Amount, Is.EqualTo(100));
+            Assert.That(orderedTransactions[2].Amount, Is.EqualTo(90));
+            Assert.That(orderedTransactions[2].Id, Is.EqualTo(15));
+            Assert.That(orderedTransactions[3].Amount, Is.EqualTo(12));
+            Assert.That(orderedTransactions[3].Id, Is.EqualTo(12));
         }
 
         [Test]
@@ -326,14 +326,14 @@ namespace Chainblock.Tests
         }
 
         [Test]
-        public void GetByReceiverOrderedByAmountThenByIdShouldThrowExceptionWhenNoReceiverIsNull()
+        public void GetByReceiverOrderedByAmountThenByIdShouldThrowExceptionWhenReceiverIsNull()
         {
             Assert.That(() => this.chainblock.GetByReceiverOrderedByAmountThenById(null),
                 Throws.InvalidOperationException.With.Message.EqualTo("Receiver cannot be null or empty."));
         }
 
         [Test]
-        public void GetByReceiverOrderedByAmountThenByIdShouldThrowExceptionWhenNoReceiverIsEmpty()
+        public void GetByReceiverOrderedByAmountThenByIdShouldThrowExceptionWhenReceiverIsEmpty()
         {
             Assert.That(() => this.chainblock.GetByReceiverOrderedByAmountThenById(string.Empty),
                 Throws.InvalidOperationException.With.Message.EqualTo("Receiver cannot be null or empty."));
@@ -384,7 +384,7 @@ namespace Chainblock.Tests
             this.AddMultipleTransactions();
             var orderedTransactions = this.chainblock.GetByReceiverAndAmountRange("TestReceiver1", 99, 120).ToList();
             Assert.That(orderedTransactions.Count(), Is.EqualTo(2));
-            Assert.That(orderedTransactions[0].Id, Is.EqualTo(15));
+            Assert.That(orderedTransactions[0].Id, Is.EqualTo(10));
             Assert.That(orderedTransactions[1].Id, Is.EqualTo(14));
         }
 

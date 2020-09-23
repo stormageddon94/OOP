@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace _03.Hospital
+namespace P04_Hospital
 {
     public class Department
     {
@@ -10,7 +10,9 @@ namespace _03.Hospital
         }
         public string Name { get; set; }
 
+
         public List<Room> Rooms { get; set; } = new List<Room>();
+
 
     }
 }
