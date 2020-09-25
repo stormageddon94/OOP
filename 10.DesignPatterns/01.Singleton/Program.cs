@@ -6,7 +6,8 @@ namespace _01.Singleton
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var db = new SingletonDataContainer.Instance;
+
         }
     }
 }

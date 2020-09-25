@@ -4,7 +4,8 @@ using System.Text;
 
 namespace _01.Singleton
 {
-    interface ISingletonContainer
+    public interface ISingletonContainer
     {
+        int GetPopulation(string name);
     }
 }
