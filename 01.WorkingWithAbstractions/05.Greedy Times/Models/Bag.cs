@@ -8,10 +8,10 @@ namespace _05.Greedy_Times.Models
     public class Bag
     {
         private Dictionary<string, IJewelCollection> allJewelsInBag;
-        private int totalAmount;
-        private int maxAmount;
+        private long totalAmount;
+        private long maxAmount;
 
-        public Bag(int maxAmount)
+        public Bag(long maxAmount)
         {
             this.maxAmount = maxAmount;
             this.allJewelsInBag = new Dictionary<string, IJewelCollection>();
@@ -26,9 +26,9 @@ namespace _05.Greedy_Times.Models
             }
         }
 
-        public int TotalAmount { get; set; }
+        public long TotalAmount { get; set; }
 
-        public int MaxAmount 
+        public long MaxAmount 
         {
             get => this.maxAmount;
             set

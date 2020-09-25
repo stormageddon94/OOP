@@ -103,6 +103,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilitaryElite", "04.Interfa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vehicles", "05.Polymorphism\Vehicles\Vehicles.csproj", "{BEB13E63-A134-46A1-B3A5-4E41BBEC630C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10.DesignPatterns", "10.DesignPatterns", "{48476509-8567-4A56-8D50-B36D898FAE19}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.Singleton", "10.DesignPatterns\01.Singleton\01.Singleton.csproj", "{8265BA5A-7803-43C2-951D-8CCD8B865C36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -273,6 +277,10 @@ Global
 		{BEB13E63-A134-46A1-B3A5-4E41BBEC630C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEB13E63-A134-46A1-B3A5-4E41BBEC630C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEB13E63-A134-46A1-B3A5-4E41BBEC630C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8265BA5A-7803-43C2-951D-8CCD8B865C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8265BA5A-7803-43C2-951D-8CCD8B865C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8265BA5A-7803-43C2-951D-8CCD8B865C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8265BA5A-7803-43C2-951D-8CCD8B865C36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -319,6 +327,7 @@ Global
 		{C32FB5D9-11F3-4810-80C8-BCE94F9F3356} = {F9EDD95B-3166-49B8-9250-6985A0BE68AA}
 		{C0776EDD-F22F-432F-8600-B4FAD7A90E48} = {F9EDD95B-3166-49B8-9250-6985A0BE68AA}
 		{BEB13E63-A134-46A1-B3A5-4E41BBEC630C} = {B070031A-3CBD-46D2-9E3D-5E76DC86FC3D}
+		{8265BA5A-7803-43C2-951D-8CCD8B865C36} = {48476509-8567-4A56-8D50-B36D898FAE19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64A1EE09-437F-41D4-AE52-A1D485FA90DC}

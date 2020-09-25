@@ -8,9 +8,9 @@ namespace _05.Greedy_Times.Models
     public class Gem : IJewel
     {
         private string name;
-        private int amount;
+        private long amount;
 
-        public Gem(string name, int amount)
+        public Gem(string name, long amount)
         {
             this.name = name;
             this.amount = amount;
@@ -25,7 +25,7 @@ namespace _05.Greedy_Times.Models
             }
         }
 
-        public int Amount
+        public long Amount
         {
             get => this.amount;
             set

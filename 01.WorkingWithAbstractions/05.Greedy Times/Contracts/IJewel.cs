@@ -8,7 +8,7 @@ namespace _05.Greedy_Times.Contracts
     {
         public string Name { get; set; }
 
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
 
     }

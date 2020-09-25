@@ -10,17 +10,21 @@ namespace _05.Greedy_Times
     {
         static void Main(string[] args)
         {
-            var maxBagAmount = int.Parse(Console.ReadLine());
+            var maxBagAmount = long.Parse(Console.ReadLine());
             var bag = new Bag(maxBagAmount);
 
             var jewels = Console.ReadLine().Split().ToList();
 
-            for (int i = 0; i < jewels.Count; i+=2)
+            for (int i = 0; i < jewels.Count; i += 2)
             {
-                var jewelName = jewels[i].ToLower(); 
-                var jewelAmount = int.Parse(jewels[i + 1]);
+                var jewelName = jewels[i].ToLower();
+                var jewelAmount = long.Parse(jewels[i + 1]);
                 string keyForBagJewelsList;
-
+                //if the new jewel amount is bigger than the ones already in the list
+                //remove the lowest amount jewel and add the new jewel
+                // same  as above goes to Jewel collection
+                // if the total amount of the bag is exceeded program doesn't break
+                // double check the Bag class
                 if (jewelName == "gold")
                 {
                     var gold = new Gold(jewelName, jewelAmount);

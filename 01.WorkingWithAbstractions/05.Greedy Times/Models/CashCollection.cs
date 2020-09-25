@@ -14,7 +14,7 @@ namespace _05.Greedy_Times.Models
             this.jewelsTaken = new List<IJewel>();
         }
         public List<IJewel> JewelsTaken { get; set; }
-        public int TotalAmount { get; set; }
+        public long TotalAmount { get; set; }
 
         public void AddJewel(IJewel jewel)
         {
