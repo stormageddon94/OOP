@@ -7,7 +7,7 @@ namespace WildFarm.Animals
 {
     public class Cat : Feline
     {
-        public Cat(string name, double weight, int foodEaten, string livingRegion, string breed) : base(name, weight, foodEaten, livingRegion, breed)
+        public Cat(string name, decimal weight, /*int foodEaten,*/ string livingRegion, string breed) : base(name, weight, livingRegion, breed)
         {
         }
 
@@ -22,7 +22,8 @@ namespace WildFarm.Animals
             var foodType = food.GetType();
             if (foodType.Name == "Vegetable" || foodType.Name == "Meat")
             {
-                this.Weight +=  (food.Quantity * 0.30);
+                this.FoodEaten = food.Quantity;
+                this.Weight +=  Convert.ToDecimal(food.Quantity * 0.30);
             }
             else
             {

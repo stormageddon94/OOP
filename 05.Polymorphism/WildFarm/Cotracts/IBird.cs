@@ -6,6 +6,6 @@ namespace WildFarm.Cotracts
 {
     public interface IBird : IAnimal
     {
-        double WingSize { get; }
+        decimal WingSize { get; }
     }
 }

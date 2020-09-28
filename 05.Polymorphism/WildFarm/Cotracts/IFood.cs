@@ -6,6 +6,6 @@ namespace WildFarm.Cotracts
 {
     public interface IFood
     {
-        int Quantity { get; }
+        long Quantity { get; }
     }
 }

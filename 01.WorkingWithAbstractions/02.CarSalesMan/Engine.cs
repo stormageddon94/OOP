@@ -6,7 +6,7 @@ namespace _02.CarSalesMan
 {
     public class Engine
     {
-        public Engine(string model, int power, int displacement = -1, string efficiency = "n/a")
+        public Engine(string model, int power, int displacement = 0, string efficiency = "n/a")
         {
             this.Model = model;
             this.Power = power;
@@ -24,10 +24,11 @@ namespace _02.CarSalesMan
 
         public override string ToString()
         {
+            var displacement = this.Displacement == 0 ? "n/a" : this.Displacement.ToString();
             var result = new StringBuilder();
             result.AppendLine($"  {this.Model}:");
             result.AppendLine($"    Power: {this.Power}");
-            result.AppendLine($"    Displacement: {this.Displacement}");
+            result.AppendLine($"    Displacement: {displacement}");
             result.AppendLine($"    Efficiency: {this.Efficiency}");
             return result.ToString();
         }

@@ -7,16 +7,17 @@ namespace WildFarm.Animals
 {
      public abstract class Bird : Animal, IBird
     {
-        protected Bird(string name, double weight, int foodEaten, double wingSize) : base(name, weight, foodEaten)
+        protected Bird(string name, decimal weight, /*int foodEaten,*/ decimal wingSize) : base(name, weight/*foodEaten*/)
         {
             this.WingSize = wingSize;
         }
 
-        public double WingSize { get; private set; }
+        public decimal WingSize { get; private set; }
 
         public override string ToString()
         {
-            return $"{this.GetType().Name} [{this.Name}, {this.WingSize}, {this.Weight:F2}, {this.FoodEaten}]";
+            var weight = string.Format("{0:0.#####}", this.Weight);
+            return $"{this.GetType().Name} [{this.Name}, {this.WingSize}, {weight}, {this.FoodEaten}]";
         }
 
     }

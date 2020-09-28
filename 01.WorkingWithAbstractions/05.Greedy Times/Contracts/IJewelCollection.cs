@@ -8,7 +8,7 @@ namespace _05.Greedy_Times.Contracts
     {
         public List<IJewel> JewelsTaken { get; set; }
 
-        public long TotalAmount { get; set; }
+        public long TotalAmount { get; }
 
         public void AddJewel(IJewel jewel);
     }

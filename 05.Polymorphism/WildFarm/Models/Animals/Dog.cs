@@ -7,7 +7,7 @@ namespace WildFarm.Animals
 {
     public class Dog : Mammal
     {
-        public Dog(string name, double weight, int foodEaten, string livingRegion) : base(name, weight, foodEaten, livingRegion)
+        public Dog(string name, decimal weight, /*int foodEaten,*/ string livingRegion) : base(name, weight, livingRegion)
         {
         }
 
@@ -22,7 +22,7 @@ namespace WildFarm.Animals
             if (foodType.Name == "Meat")
             {
                 this.FoodEaten = food.Quantity;
-                this.Weight += 0.40;
+                this.Weight += Convert.ToDecimal(0.40);
             }
             else
             {

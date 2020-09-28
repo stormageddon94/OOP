@@ -7,7 +7,7 @@ namespace WildFarm.Foods
 {
     public class Seed : Food
     {
-        public Seed(int quantity) : base(quantity)
+        public Seed(long quantity) : base(quantity)
         {
         }
     }

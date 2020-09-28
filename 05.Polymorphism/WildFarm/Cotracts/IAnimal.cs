@@ -8,9 +8,9 @@ namespace WildFarm.Cotracts
     {
         string Name { get; }
 
-        double Weight { get; }
+        decimal Weight { get; }
 
-        int FoodEaten { get; }
+        long FoodEaten { get; }
 
         string AskForFood();
 

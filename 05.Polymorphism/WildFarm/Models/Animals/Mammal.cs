@@ -7,7 +7,7 @@ namespace WildFarm.Animals
 {
     public abstract class Mammal : Animal, IMammal
     {
-        protected Mammal(string name, double weight, int foodEaten, string livingRegion) : base(name, weight, foodEaten)
+        protected Mammal(string name, decimal weight, /*int foodEaten,*/ string livingRegion) : base(name, weight)
         {
             this.LivingRegion = livingRegion;
         }
@@ -16,7 +16,8 @@ namespace WildFarm.Animals
 
         public override string ToString()
         {
-            return $"{this.GetType().Name} [{this.Name}, {this.Weight:F2}, {this.LivingRegion}, {this.FoodEaten}]";
+            var weight = string.Format("{0:0.#####}", this.Weight);
+            return $"{this.GetType().Name} [{this.Name}, {weight}, {this.LivingRegion}, {this.FoodEaten}]";
         }
 
     }

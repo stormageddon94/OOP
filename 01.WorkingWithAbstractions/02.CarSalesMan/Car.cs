@@ -26,7 +26,7 @@ namespace _02.CarSalesMan
             sb.Append(this.Engine.ToString());
             var weightResult = this.Weight == 0 ? "n/a" : this.Weight.ToString();
             sb.AppendLine($"  Weight: {weightResult}");
-            sb.AppendLine($"  Color: {this.Color}");
+            sb.Append($"  Color: {this.Color}");
 
             return sb.ToString();
         }

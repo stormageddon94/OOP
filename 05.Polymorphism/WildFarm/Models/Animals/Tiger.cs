@@ -7,7 +7,7 @@ namespace WildFarm.Animals
 {
     public class Tiger : Feline
     {
-        public Tiger(string name, double weight, int foodEaten, string livingRegion, string breed) : base(name, weight, foodEaten, livingRegion, breed)
+        public Tiger(string name, decimal weight, /*int foodEaten,*/ string livingRegion, string breed) : base(name, weight, livingRegion, breed)
         {
         }
 
@@ -23,10 +23,11 @@ namespace WildFarm.Animals
             {
 
                 this.FoodEaten = food.Quantity;
-                this.Weight += (food.Quantity * 1.00);
+                this.Weight += Convert.ToDecimal(food.Quantity * 1.00);
             }
             else
             {
+                this.FoodEaten = 0;
                 throw new ArgumentException($"Tiger does not eat {foodType.Name}!");
             }
         }

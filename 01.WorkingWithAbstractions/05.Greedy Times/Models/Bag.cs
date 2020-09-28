@@ -8,7 +8,7 @@ namespace _05.Greedy_Times.Models
     public class Bag
     {
         private Dictionary<string, IJewelCollection> allJewelsInBag;
-        private long totalAmount;
+        //private long totalAmount;
         private long maxAmount;
 
         public Bag(long maxAmount)
@@ -39,11 +39,12 @@ namespace _05.Greedy_Times.Models
 
         public void AddJewelAmountToBagAmount(IJewel jewel)
         {
-            this.TotalAmount += jewel.Amount;
-            if (totalAmount > maxAmount)
+            if (this.TotalAmount + jewel.Amount > maxAmount)
             {
                 throw new ArgumentException("Max capacity of bag exceeded.");
             }
+
+            this.TotalAmount += jewel.Amount;
         }
 
     }

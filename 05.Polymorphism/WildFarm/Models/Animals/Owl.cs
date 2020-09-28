@@ -7,7 +7,7 @@ namespace WildFarm.Animals
 {
     public class Owl : Bird
     {
-        public Owl(string name, double weight, int foodEaten, double wingSize) : base(name, weight, foodEaten, wingSize)
+        public Owl(string name, decimal weight, /*int foodEaten,*/ decimal wingSize) : base(name, weight, wingSize)
         {
 
         }
@@ -24,7 +24,7 @@ namespace WildFarm.Animals
             {
 
                 this.FoodEaten = food.Quantity;
-                this.Weight += (food.Quantity * 0.25);
+                this.Weight += Convert.ToDecimal(food.Quantity * 0.25);
             }
             else
             {

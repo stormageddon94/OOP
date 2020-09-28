@@ -1,5 +1,4 @@
-﻿using _05.Greedy_Times.Contracts;
-using _05.Greedy_Times.Models;
+﻿using _05.Greedy_Times.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ namespace _05.Greedy_Times
 {
     class Program
     {
+        static List<string> jewelPriorities = new List<string> { "Gold", "Gem", "Cash" };
         static void Main(string[] args)
         {
             var maxBagAmount = long.Parse(Console.ReadLine());
@@ -15,72 +15,69 @@ namespace _05.Greedy_Times
 
             var jewels = Console.ReadLine().Split().ToList();
 
-            for (int i = 0; i < jewels.Count; i += 2)
+            var jewelPairs = jewels.Select((x, i) => new { Key = i / 2, Value = x })
+                                   .GroupBy(x => x.Key, x => x.Value);
+
+            foreach (var pair in jewelPairs)
             {
-                var jewelName = jewels[i].ToLower();
-                var jewelAmount = long.Parse(jewels[i + 1]);
-                string keyForBagJewelsList;
-                //if the new jewel amount is bigger than the ones already in the list
-                //remove the lowest amount jewel and add the new jewel
-                // same  as above goes to Jewel collection
-                // if the total amount of the bag is exceeded program doesn't break
-                // double check the Bag class
-                if (jewelName == "gold")
-                {
-                    var gold = new Gold(jewelName, jewelAmount);
-                    keyForBagJewelsList = "Gold";
-                    if (!bag.AllJewelsInBag.ContainsKey(keyForBagJewelsList))
-                    {
-                        bag.AllJewelsInBag[keyForBagJewelsList] = new GoldCollection();
-                    }
+                var pairAsArray = pair.ToArray();
+                var jewelName = pairAsArray[0];
+                string jewelType = string.Empty;
+                var jewelAmount = long.Parse(pairAsArray[1]);
 
-                    bag.AllJewelsInBag[keyForBagJewelsList].AddJewel(gold);
-                    try
-                    {
-                        bag.AddJewelAmountToBagAmount(gold);
-                    }
-                    catch (ArgumentException)
-                    {
-                        break;
-                    }
+                if (jewelName == "Gold")
+                {
+                    jewelType = "Gold";
                 }
-                else if (jewelName.EndsWith("gem") && jewelName.Length >= 4)
+                else if (jewelName.ToLower().EndsWith("gem") && jewelName.Length >= 4)
                 {
-                    var gem = new Gem(jewelName, jewelAmount);
-                    keyForBagJewelsList = "Gem";
-                    if (!bag.AllJewelsInBag.ContainsKey(keyForBagJewelsList))
-                    {
-                        bag.AllJewelsInBag[keyForBagJewelsList] = new GemCollection();
-                    }
-
-                    bag.AllJewelsInBag[keyForBagJewelsList].AddJewel(gem);
-                    try
-                    {
-                        bag.AddJewelAmountToBagAmount(gem);
-                    }
-                    catch (ArgumentException)
-                    {
-                        break;
-                    }
+                    jewelType = "Gem";
                 }
                 else if (jewelName.Length == 3)
                 {
-                    var cash = new Cash(jewelName, jewelAmount);
-                    keyForBagJewelsList = "Cash";
-                    if (!bag.AllJewelsInBag.ContainsKey(keyForBagJewelsList))
-                    {
-                        bag.AllJewelsInBag[keyForBagJewelsList] = new CashCollection();
-                    }
+                    jewelType = "Cash";
+                }
 
-                    bag.AllJewelsInBag[keyForBagJewelsList].AddJewel(cash);
-                    try
+                if (!string.IsNullOrEmpty(jewelType))
+                {
+                    var gemTotalAmount = bag.AllJewelsInBag.FirstOrDefault(x => x.Key == "Gem").Value?.TotalAmount ?? 0;
+                    var goldTotalAmount = bag.AllJewelsInBag.FirstOrDefault(x => x.Key == "Gold").Value?.TotalAmount ?? 0;
+                    var cashTotalAmount = bag.AllJewelsInBag.FirstOrDefault(x => x.Key == "Cash").Value?.TotalAmount ?? 0;
+                    if (jewelType == "Gold" || jewelType == "Gem" && gemTotalAmount + jewelAmount <= goldTotalAmount ||
+                        jewelType == "Cash" && cashTotalAmount + jewelAmount <= gemTotalAmount)
                     {
-                        bag.AddJewelAmountToBagAmount(cash);
+                        var jewel = new Jewel(jewelName, jewelAmount);
+                        try
+                        {
+                            bag.AddJewelAmountToBagAmount(jewel);
+                        }
+                        catch (ArgumentException)
+                        {
+                            break;
+                        }
+
+                        if (!bag.AllJewelsInBag.ContainsKey(jewelType))
+                        {
+                            bag.AllJewelsInBag[jewelType] = new JewelCollection();
+                        }
+
+                        bag.AllJewelsInBag[jewelType].AddJewel(jewel);
                     }
-                    catch (ArgumentException)
-                    {
-                        break;
-                    }
+                }
+
+
+            }
+
+            var orderedJewelPairs = bag.AllJewelsInBag.OrderByDescending(x => x.Value.TotalAmount);
+
+            foreach (var pair in orderedJewelPairs)
+            {
+                var orderedCollectionOfJewels = pair.Value.JewelsTaken.OrderByDescending(x => x.Name).ThenBy(y => y.Amount);
+                Console.WriteLine($"<{pair.Key}> ${pair.Value.TotalAmount}");
+
+                foreach (var jewel in orderedCollectionOfJewels)
+                {
+                    Console.WriteLine(jewel);
                 }
             }
         }

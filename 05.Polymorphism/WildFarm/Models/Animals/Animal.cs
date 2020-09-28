@@ -7,17 +7,17 @@ namespace WildFarm.Animals
 {
     public abstract class Animal : IAnimal
     {
-        public Animal(string name, double weight, int foodEaten)
+        public Animal(string name, decimal weight /*int foodEaten*/)
         {
             this.Name = name;
             this.Weight = weight;
-            this.FoodEaten = foodEaten;
+            //this.FoodEaten = foodEaten;
         }
         public string Name { get; protected set; }
 
-        public double Weight { get; protected set; }
+        public decimal Weight { get; protected set; }
 
-        public int FoodEaten { get; protected set; }
+        public long FoodEaten { get; protected set; }
 
         public abstract string AskForFood();
 

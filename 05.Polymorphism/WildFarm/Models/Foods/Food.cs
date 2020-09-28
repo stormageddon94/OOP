@@ -7,11 +7,11 @@ namespace WildFarm.Models
 {
     public abstract class Food : IFood
     {
-        public Food(int quantity)
+        public Food(long quantity)
         {
             this.Quantity = quantity;
         }
 
-        public int Quantity { get; private set; }
+        public long Quantity { get; private set; }
     }
 }
